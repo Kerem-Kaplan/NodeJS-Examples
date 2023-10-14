@@ -1,0 +1,115 @@
+POST http://localhost:3000/api/post
+Content-Type:  application/json
+
+{
+    "name":"Kerem 2042430",
+    "age":21
+}
+
+###
+
+GET http://localhost:3000/api/getAll
+
+###
+
+GET http://localhost:3000/api/getOne/6526ee91cd8779a09eeaedbc
+
+###
+
+PATCH  http://localhost:3000/api/update/6526ee91cd8779a09eeaedbc
+Content-Type: application/json
+
+{
+    "name":"Kerem1111",
+    "age":34
+}
+
+###
+
+DELETE  http://localhost:3000/api/delete/6526f00f70bd6994b53c1f87
+
+#############################################################
+
+POST http://localhost:3000/complainant/signUp
+Content-Type:  application/json
+
+{
+    "name":"Kerem",
+    "surname":"Kaplan",
+    "gender":"Male",
+    "email":"kerem@mail.com",
+    "password":"kerem123",
+    "phoneNumber":"05555555555",
+    "nationality":"Turk",
+    "dateOfBirth":"2002-15-01"
+}
+
+###
+
+POST http://localhost:3000/corporation/signUp
+Content-Type:  application/json
+
+{
+    "name":["Eshot"]
+}
+
+###
+POST http://localhost:3000/login
+Content-Type:  application/json
+
+{
+    "email":"kerem@mail",
+    "sifre":"12345"
+}
+
+###
+POST http://localhost:3000/sikayetci/sign-up
+Content-Type: application/json
+
+{
+    "isim": "dfgfdgdf",
+      "soyisim": "kaplan",
+      "cinsiyet": "erkek",
+      "dogumTarihi": "dsfsd",
+      "uyruk": "dfgdf",
+      "tcveyapasaport": "dfgdf",
+      "email": "gdf",
+      "sifre": "fghgfhfg",
+      "telefonNo": "fghfh",
+      "rol": "sdgdf"
+}
+
+###
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email":"eshot@mail.com",
+    "sifre":"12345" 
+}
+
+###
+
+GET http://localhost:3000/gozlemci/sikayet-goruntule/652ae8e906aa041cb56b06c7
+
+###
+GET http://localhost:3000/gozlemci/oneri-goruntule/652ae92330f6a6cf8134e602
+###
+GET http://localhost:3000/sikayetci/gecmis-sikayet/652ae8e906aa041cb56b06c7
+Content-Type: application/json
+
+{
+    "rol":"şikayetçi"
+}
+###
+GET http://localhost:3000/gozlemci/oneri-goruntule/652ae92330f6a6cf8134e602
+Content-Type: application/json
+
+{
+    "rol":"gozlemci"
+}
+###
+POST  http://localhost:3000/sikayetci/sikayet-gonder
+
+{
+     "gozlemciId":
