@@ -67,12 +67,12 @@ POST http://localhost:3000/sikayetci/sign-up
 Content-Type: application/json 
 
 {
-    "isim": "Havvanur",
-    "soyisim": "Kaplan",
+    "isim": "aaaa",
+    "soyisim": "ffffff",
     "cinsiyet": "Kadın",
     "dogumTarihi": 2004,
     "uyruk": "Türk",
-    "tcveyapasaport": "10211590290",
+    "tcveyapasaport": "1111111111",
     "email": "havvanur@gmail.com",
     "sifre": "havvanur",
     "telefonNo": "03333333333",
