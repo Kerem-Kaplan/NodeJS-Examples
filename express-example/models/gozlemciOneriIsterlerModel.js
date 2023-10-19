@@ -9,7 +9,7 @@ const gozlemciOneritIsterler = new mongoose.Schema(
     isterler: {
       required: true,
       type: Object,
-      sikayetKonusu: {
+      oneriKonusu: {
         required: false,
         type: [String],
       },

@@ -13,6 +13,10 @@ const gozlemciSikayetIsterler = new mongoose.Schema(
         required: false,
         type: [String],
       },
+      oyMiktarı: {
+        required: true,
+        type: Number,
+      },
     },
   },
   {
