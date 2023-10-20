@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const database = require("./database");
 
 const mernisDogrula = async (req, res) => {
-  await database.connect();
+  
   const requestArgs = {
     TCKimlikNo: req.body.tcveyapasaport,
     Ad: req.body.isim,

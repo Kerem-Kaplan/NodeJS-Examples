@@ -41,6 +41,7 @@ const sikayetciSchema = new mongoose.Schema(
     rol: {
       required: true,
       type: String,
+      default:"şikayetçi"
     },
   },
   {
@@ -49,4 +50,4 @@ const sikayetciSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("sikayetci", sikayetciSchema);
+module.exports = mongoose.model("user", sikayetciSchema);
