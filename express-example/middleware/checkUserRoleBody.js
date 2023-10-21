@@ -1,30 +1,18 @@
-const sikayetci = require("../models/users/sikayetciModel.js");
+const User = require("../models/users/userModel.js");
 const database = require("./database.js");
 
 const checkUserRoleBody = (permissions) => {
   return async (req, res, next) => {
-    console.log(req.body)
-    if (req.body.sikayetciId === undefined) {
-      const userRole = await getUserRoles(req.body.gozlemciId);
-      if (userRole === undefined) {
-        res.send("Kullanıcı bulunamadı");
-      } else {
-        if (permissions.includes(userRole[0].rol)) {
-          next();
-        } else {
-          return res.status(403).json({ message: "Erişim reddedildi" });
-        }
-      }
+    console.log(req.body);
+
+    const userRole = await getUserRoles(req.body._id);
+    if (userRole === undefined) {
+      res.send("Kullanıcı bulunamadı");
     } else {
-      const userRole = await getUserRoles(req.body.sikayetciId);
-      if (userRole === undefined) {
-        res.send("Kullanıcı bulunamadı");
+      if (permissions.includes(userRole[0].rol)) {
+        next();
       } else {
-        if (permissions.includes(userRole[0].rol)) {
-          next();
-        } else {
-          return res.status(403).json({ message: "Erişim reddedildi" });
-        }
+        return res.status(403).json({ message: "Erişim reddedildi" });
       }
     }
   };
@@ -33,9 +21,9 @@ const checkUserRoleBody = (permissions) => {
 const getUserRoles = async (userId) => {
   await database.connect();
   try {
-    const userSikayetci = await sikayetci.find({ _id: userId });
-    if (userSikayetci.length !== 0) {
-      return userSikayetci;
+    const user = await User.find({ _id: userId });
+    if (user.length !== 0) {
+      return user;
     } else {
     }
     await database.close();

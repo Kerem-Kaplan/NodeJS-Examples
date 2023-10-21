@@ -1,6 +1,6 @@
 const soap = require("strong-soap").soap;
 const url = "https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx?WSDL";
-const sikayetciModel = require("../models/users/sikayetciModel");
+const sikayetciModel = require("../models/users/userModel");
 const bcrypt = require("bcrypt");
 const database = require("./database");
 

@@ -9,6 +9,7 @@ const gozlemciOneriIsterlerModel = require("../models/gozlemciOneriIsterlerModel
 const gozlemciIstekIsterlerModel = require("../models/gozlemciIstekIsterlerModel");
 const database = require("../middleware/database");
 const { checkUserRoleParams } = require("../middleware/checkUserRoleParams");
+const { authenticateToken } = require("../middleware/authenticateToken ");
 
 router.get(
   "/sikayet-goruntule/:id",
@@ -89,9 +90,14 @@ router.get(
   }
 );
 
-router.get("/homepage", checkUserRoleBody(["gözlemci"]), async (req, res) => {
-  res.json({ message: "gözlemci anasayfa" });
-});
+router.get(
+  "/homepage",
+  authenticateToken,
+  checkUserRoleBody(["gözlemci"]),
+  async (req, res) => {
+    res.json({ message: "gözlemci anasayfa" });
+  }
+);
 
 router.get(
   "/profil/:id",

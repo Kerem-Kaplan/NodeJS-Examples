@@ -1,5 +1,5 @@
 const express = require("express");
-const sikayetciModel = require("../models/users/sikayetciModel");
+const User = require("../models/users/userModel");
 const sikayetModel = require("../models/sikayetlerModel");
 const router = express.Router();
 const { checkUserRoleBody } = require("../middleware/checkUserRoleBody");
@@ -11,11 +11,20 @@ const oneriler = require("../models/oneriler");
 const isteklerModel = require("../models/isteklerModel");
 const oylar = require("../models/oylar");
 const { checkUserRoleParams } = require("../middleware/checkUserRoleParams");
+const { authenticateToken } = require("../middleware/authenticateToken ");
 
 router.post("/sign-up", async (req, res, next) => {
   await database.connect();
   try {
-    await mernisDogrula(req, res);
+    const user = await User.findOne({
+      tcveyapasaport: req.body.tcveyapasaport,
+    });
+    console.log(typeof user);
+    if (user === null) {
+      await mernisDogrula(req, res);
+    } else {
+      res.send("Bu TC adresi zaten kayıtlı");
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Kayıt sırasında bir hata oluştu" });
@@ -190,8 +199,14 @@ router.get(
   }
 );
 
-router.get("/homepage", checkUserRoleBody(["şikayetçi"]), async (req, res) => {
-  res.json({ message: "şikayetçi anasayfa" });
-});
+router.get(
+  "/homepage",
+  authenticateToken,
+  checkUserRoleBody(["şikayetçi"]),
+  async (req, res) => {
+    req.headers
+    res.json({ message: "şikayetçi anasayfa" });
+  }
+);
 
 module.exports = router;

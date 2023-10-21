@@ -1,5 +1,4 @@
-
-const sikayetci = require("../models/users/sikayetciModel.js");
+const User = require("../models/users/userModel.js");
 const database = require("./database.js");
 
 const checkUserRoleParams = (permissions) => {
@@ -20,9 +19,9 @@ const checkUserRoleParams = (permissions) => {
 const getUserRoles = async (userId) => {
   await database.connect();
   try {
-    const userSikayetci = await sikayetci.find({ _id: userId });
-    if (userSikayetci.length !== 0) {
-      return userSikayetci;
+    const user = await User.find({ _id: userId });
+    if (user.length !== 0) {
+      return user;
     }
     await database.close();
   } catch (error) {

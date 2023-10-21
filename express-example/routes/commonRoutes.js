@@ -1,43 +1,41 @@
 const express = require("express");
 const router = express.Router();
-const gozlemciModel = require("../models/users/gozlemciModel");
-const sikayetciModel = require("../models/users/sikayetciModel");
+const User = require("../models/users/userModel");
 const bcrypt = require("bcrypt");
 const database = require("../middleware/database");
+const jwt = require("jsonwebtoken");
+const { generateToken } = require("../middleware/generateToken");
 
 router.post("/login", async (req, res) => {
   const { email, sifre } = req.body;
   await database.connect();
   try {
-    const sikayetciUser = await sikayetciModel.findOne({ email });
-    const gozlemciUser = await gozlemciModel.findOne({ email });
-
-    if (!sikayetciUser && !gozlemciUser) {
-      return res.status(401).json({ message: "kullanıcı bulunamadı" });
-    }
-    if (gozlemciUser) {
-      if (gozlemciUser.sifre !== sifre) {
-        return res.status(401).json({ message: "gozlemci parola hatalı" });
-      }
-      res.status(200).json({ message: "gozlemci Giris basarili" });
-    }
-    if (sikayetciUser) {
-      bcrypt.compare(sifre, sikayetciUser.sifre, (err, result) => {
+    const user = await User.findOne({ email });
+    console.log(user);
+    if (user) {
+      bcrypt.compare(sifre, user.sifre, (err, result) => {
         if (err) {
           res.send("Karşılaştırma hatası", err);
         } else {
           if (result) {
-            res.status(200).json({ message: "sikayetci Giris basarili" });
+            const token = generateToken(user._id, user.email, user.sifre);
+            res
+              .status(200)
+              .json({ message: "kullanıcı Giris basarili", token: token });
+
+            console.log(token);
           } else {
-            res.send("Yanlış Şifre");
+            return res.status(401).json({ message: "kullanıcı parola hatalı" });
           }
         }
       });
+    } else {
+      return res.status(401).json({ message: "kullanıcı bulunamadı" });
     }
-    database.close();
+    await database.close();
   } catch (error) {
     res.status(500).json({ message: "Bir hata oluştu" });
-    database.close();
+    await database.close();
   }
 
   /*  try {

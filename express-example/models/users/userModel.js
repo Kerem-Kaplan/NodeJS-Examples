@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const sikayetciSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     isim: {
       required: true,
@@ -41,7 +41,7 @@ const sikayetciSchema = new mongoose.Schema(
     rol: {
       required: true,
       type: String,
-      default:"şikayetçi"
+      default: "şikayetçi",
     },
   },
   {
@@ -50,4 +50,4 @@ const sikayetciSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("user", sikayetciSchema);
+module.exports = mongoose.model("user", userSchema);
