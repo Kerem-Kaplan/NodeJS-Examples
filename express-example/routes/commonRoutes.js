@@ -18,12 +18,11 @@ router.post("/login", async (req, res) => {
           res.send("Karşılaştırma hatası", err);
         } else {
           if (result) {
-            const token = generateToken(user._id, user.email, user.sifre);
+            const token = generateToken(user._id);
+            console.log("User TOKEN:", token);
             res
               .status(200)
               .json({ message: "kullanıcı Giris basarili", token: token });
-
-            console.log(token);
           } else {
             return res.status(401).json({ message: "kullanıcı parola hatalı" });
           }

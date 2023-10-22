@@ -13,6 +13,7 @@ const { authenticateToken } = require("../middleware/authenticateToken ");
 
 router.get(
   "/sikayet-goruntule/:id",
+  authenticateToken,
   checkUserRoleParams(["gözlemci"]),
   async (req, res) => {
     await database.connect();
@@ -40,6 +41,7 @@ router.get(
 
 router.get(
   "/oneri-goruntule/:id",
+  authenticateToken,
   checkUserRoleParams(["gözlemci"]),
   async (req, res) => {
     await database.connect();
@@ -66,6 +68,7 @@ router.get(
 
 router.get(
   "/istek-goruntule/:id",
+  authenticateToken,
   checkUserRoleParams(["gözlemci"]),
   async (req, res) => {
     await database.connect();
@@ -101,6 +104,7 @@ router.get(
 
 router.get(
   "/profil/:id",
+  authenticateToken,
   checkUserRoleParams(["gözlemci"]),
   async (req, res) => {
     res.json({ message: "gözlemci profil sayfası" });
@@ -148,6 +152,7 @@ router.post(
 
 router.post(
   "/oneri-ister-ekle/:id",
+  authenticateToken,
   checkUserRoleParams(["gözlemci"]),
   async (req, res) => {
     await database.connect();
@@ -225,7 +230,8 @@ router.post(
 );
 
 router.get(
-  "/sikayetIsterler/:id",
+  "/sikayet-isterler/:id",
+  authenticateToken,
   checkUserRoleParams(["gözlemci"]),
   async (req, res) => {
     await database.connect();
@@ -253,7 +259,8 @@ router.get(
 );
 
 router.get(
-  "/oneriIsterler/:id",
+  "/oneri-isterler/:id",
+  authenticateToken,
   checkUserRoleParams(["gözlemci"]),
   async (req, res) => {
     await database.connect();
@@ -281,7 +288,8 @@ router.get(
 );
 
 router.get(
-  "/istekIsterler/:id",
+  "/istek-isterler/:id",
+  authenticateToken,
   checkUserRoleParams(["gözlemci"]),
   async (req, res) => {
     await database.connect();

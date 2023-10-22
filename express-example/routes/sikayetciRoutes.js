@@ -34,6 +34,7 @@ router.post("/sign-up", async (req, res, next) => {
 
 router.post(
   "/sikayet-gonder",
+  authenticateToken,
   checkUserRoleBody(["şikayetçi"]),
   async (req, res) => {
     await database.connect();
@@ -61,6 +62,7 @@ router.post(
 
 router.post(
   "/oneri-gonder",
+  authenticateToken,
   checkUserRoleBody(["şikayetçi"]),
   async (req, res) => {
     await database.connect();
@@ -88,6 +90,7 @@ router.post(
 
 router.post(
   "/istek-gonder",
+  authenticateToken,
   checkUserRoleBody(["şikayetçi"]),
   async (req, res) => {
     await database.connect();
@@ -114,6 +117,7 @@ router.post(
 
 router.get(
   "/profil/:id",
+  authenticateToken,
   checkUserRoleParams(["şikayetçi"]),
   async (req, res) => {
     res.json({ message: "sikayetci profil sayfası" });
@@ -122,6 +126,7 @@ router.get(
 
 router.get(
   "/gecmis-sikayet/:id",
+  authenticateToken,
   checkUserRoleParams(["şikayetçi"]),
   async (req, res) => {
     await database.connect();
@@ -149,6 +154,7 @@ router.get(
 
 router.get(
   "/gecmis-istek/:id",
+  authenticateToken,
   checkUserRoleParams(["şikayetçi"]),
   async (req, res) => {
     await database.connect();
@@ -175,6 +181,7 @@ router.get(
 
 router.get(
   "/gecmis-oneri/:id",
+  authenticateToken,
   checkUserRoleParams(["şikayetçi"]),
   async (req, res) => {
     await database.connect();
@@ -204,7 +211,7 @@ router.get(
   authenticateToken,
   checkUserRoleBody(["şikayetçi"]),
   async (req, res) => {
-    req.headers
+    req.headers;
     res.json({ message: "şikayetçi anasayfa" });
   }
 );

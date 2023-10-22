@@ -6,17 +6,17 @@ const gozlemciSikayetIsterler = new mongoose.Schema(
       required: true,
       type: mongoose.Types.ObjectId,
     },
+    oyMiktarı: {
+      required: true,
+      type: Number,
+    },
+    sikayetKonusu: {
+      required: false,
+      type: [String],
+    },
     isterler: {
       required: true,
       type: Object,
-      sikayetKonusu: {
-        required: false,
-        type: [String],
-      },
-      oyMiktarı: {
-        required: true,
-        type: Number,
-      },
     },
   },
   {
